@@ -1,0 +1,34 @@
+version: "3"
+networks:
+  default:
+    driver: bridge
+services:
+  api:
+    image: jinzhijie/skinrendermc-api:latest
+    ports:
+      - 57680:57680
+    environment:
+      - browserWSEndpoint=ws://chrome:3000
+      - backendSkinView3D=http://skinview3d/
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:57680/"]
+      interval: 1m30s
+      timeout: 30s
+      retries: 1
+      start_period: 30s
+    restart: unless-stopped
+    networks:
+      - default
+  chrome:
+    image: browserless/chrome:latest
+    environment:
+      - PREBOOT_CHROME="true"
+      - KEEP_ALIVE="true"
+    restart: always
+    networks:
+      - default
+  skinview3d:
+    image: jinzhijie/skinrendermc-skinview3d:latest
+    restart: always
+    networks:
+      - default

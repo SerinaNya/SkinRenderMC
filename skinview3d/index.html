@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <title>skinview3d</title>
+    <style>
+        @font-face {
+            font-family: "Minecraft";
+            src: url("./assets/minecraft.woff2") format("woff2");
+        }
+
+        body {
+            font-family: "Helvetica", "Arial", "sans-serif";
+            margin: 5px;
+        }
+    </style>
+    <script src="./bundles/skinview3d.bundle.js"></script>
+</head>
+
+<body>
+
+    <canvas id="skin_container"></canvas>
+
+    <script>
+        let currentUrl = new URL(window.location);
+
+        let nameTag = currentUrl.searchParams.get("nameTag");
+        let skinViewer = new skinview3d.SkinViewer({
+            canvas: document.getElementById("skin_container"),
+            width: 371,
+            height: 619,
+            skin: currentUrl.searchParams.get("skinUrl"),
+            cape: currentUrl.searchParams.get("capeUrl"),
+        });
+
+        skinViewer.fov = 70;
+        skinViewer.zoom = 1.0;
+        skinViewer.camera.rotation.x = -0.620;
+        skinViewer.camera.rotation.y = 0.534;
+        skinViewer.camera.rotation.z = 0.348;
+        skinViewer.camera.position.x = 20.7;
+        skinViewer.camera.position.y = 14.7;
+        skinViewer.camera.position.z = 20;
+        skinViewer.playerObject.position.x = -2;
+        skinViewer.playerObject.position.y = -5;
+        skinViewer.playerObject.position.z = -2;
+
+        // Name Tag
+        if (nameTag != null) {
+            skinViewer.nameTag = nameTag;
+            skinViewer.nameTag.position.y = 15;
+            skinViewer.nameTag.height = 2;
+        };
+
+        // Head
+        skinViewer.playerObject.skin.head.rotation.z = 0.1;
+        skinViewer.playerObject.skin.head.rotation.y = 0.4;
+        skinViewer.playerObject.skin.head.rotation.x = -0.38;
+
+        function fakeAnimation(t = 0) {
+            // Leg swing
+            skinViewer.playerObject.skin.leftLeg.rotation.x = Math.sin(t) * 0.5;
+            skinViewer.playerObject.skin.rightLeg.rotation.x = Math.sin(t + Math.PI) * 0.5;
+            // Arm swing
+            skinViewer.playerObject.skin.leftArm.rotation.x = Math.sin(t + Math.PI) * 0.5;
+            skinViewer.playerObject.skin.rightArm.rotation.x = Math.sin(t) * 0.5;
+            const basicArmRotationZ = Math.PI * 0.02;
+            skinViewer.playerObject.skin.leftArm.rotation.z = Math.cos(t) * 0.03 + basicArmRotationZ;
+            skinViewer.playerObject.skin.rightArm.rotation.z = Math.cos(t + Math.PI) * 0.03 - basicArmRotationZ;
+
+            // Always add an angle for cape around the x axis
+            const basicCapeRotationX = Math.PI * 0.06;
+            skinViewer.playerObject.cape.rotation.x = Math.sin(t / 1.5) * 0.06 + basicCapeRotationX;
+        };
+
+        fakeAnimation(4.3);
+
+        function showBack() {
+            skinViewer.camera.position.x = 20.7;
+            skinViewer.camera.position.y = 14.7;
+            skinViewer.camera.position.z = -20;
+            skinViewer.playerObject.position.x = 2;
+            skinViewer.playerObject.position.y = -5;
+            skinViewer.playerObject.position.z = -2;
+
+            fakeAnimation(2.2);
+        }
+    </script>
+
+</body>
+<!-- This project is developed by jinzhijie (https://github.com/jinzhijie) under MIT license.-->
+<!-- This project is based on https://github.com/bs-community/skinview3d . -->
+<!-- Thanks yushijinhun (https://github.com/yushijinhun) for guiding me.-->
+
+</html>

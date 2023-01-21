@@ -1,0 +1,5 @@
+fastapi
+pyppeteer
+pydantic
+uvicorn[standard]
+Wand
