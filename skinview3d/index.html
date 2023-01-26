@@ -16,20 +16,28 @@
             font-family: "Helvetica", "Arial", "sans-serif";
             margin: 5px;
         }
+
+        .front {
+            filter: drop-shadow(0px 7px 10px rgba(0, 0, 0, 0.3));
+        }
+        .back {
+            filter: drop-shadow(0px 7px 10px rgba(0, 0, 0, 0.3));
+        }
     </style>
     <script src="./bundles/skinview3d.bundle.js"></script>
 </head>
 
 <body>
 
-    <canvas id="skin_container"></canvas>
+    <canvas id="skin_container" class="front"></canvas>
 
     <script>
         let currentUrl = new URL(window.location);
-
+        let skin_container = document.getElementById("skin_container");
         let nameTag = currentUrl.searchParams.get("nameTag");
+
         let skinViewer = new skinview3d.SkinViewer({
-            canvas: document.getElementById("skin_container"),
+            canvas: skin_container,
             width: 371,
             height: 619,
             skin: currentUrl.searchParams.get("skinUrl"),
@@ -38,27 +46,29 @@
 
         skinViewer.fov = 70;
         skinViewer.zoom = 1.0;
-        skinViewer.camera.rotation.x = -0.620;
-        skinViewer.camera.rotation.y = 0.534;
-        skinViewer.camera.rotation.z = 0.348;
-        skinViewer.camera.position.x = 20.7;
-        skinViewer.camera.position.y = 14.7;
-        skinViewer.camera.position.z = 20;
-        skinViewer.playerObject.position.x = -2;
+        skinViewer.camera.position.x = 9.38;
+        skinViewer.camera.position.y = 10.31;
+        skinViewer.camera.position.z = 29.15;
+        skinViewer.camera.rotation.x = -0.33;
+        skinViewer.camera.rotation.y = 0.29;
+        skinViewer.camera.rotation.z = 0.10;
+        skinViewer.playerObject.position.x = -0.7;
         skinViewer.playerObject.position.y = -5;
-        skinViewer.playerObject.position.z = -2;
+        skinViewer.playerObject.position.z = -1;
 
         // Name Tag
         if (nameTag != null) {
             skinViewer.nameTag = nameTag;
+            skinViewer.nameTag.position.x = -0.8;
             skinViewer.nameTag.position.y = 15;
+            skinViewer.nameTag.position.z = -2.5;
             skinViewer.nameTag.height = 2;
         };
 
         // Head
-        skinViewer.playerObject.skin.head.rotation.z = 0.1;
-        skinViewer.playerObject.skin.head.rotation.y = 0.4;
-        skinViewer.playerObject.skin.head.rotation.x = -0.38;
+        skinViewer.playerObject.skin.head.rotation.x = -0.15;
+        skinViewer.playerObject.skin.head.rotation.y = -0.1;
+        skinViewer.playerObject.skin.head.rotation.z = -0.03;
 
         function fakeAnimation(t = 0) {
             // Leg swing
@@ -76,17 +86,27 @@
             skinViewer.playerObject.cape.rotation.x = Math.sin(t / 1.5) * 0.06 + basicCapeRotationX;
         };
 
-        fakeAnimation(4.3);
+        fakeAnimation(0.7);
 
-        function showBack() {
-            skinViewer.camera.position.x = 20.7;
-            skinViewer.camera.position.y = 14.7;
-            skinViewer.camera.position.z = -20;
-            skinViewer.playerObject.position.x = 2;
-            skinViewer.playerObject.position.y = -5;
-            skinViewer.playerObject.position.z = -2;
-
-            fakeAnimation(2.2);
+        function showBack(hideNameTag=false) {
+            skin_container.setAttribute("class", "back")
+            if (nameTag != null) {
+                skinViewer.nameTag.position.x = 0.9;
+                skinViewer.nameTag.position.y = 16.5;
+                skinViewer.nameTag.position.z = -2.5;
+                skinViewer.nameTag.visible = !hideNameTag;
+            };
+            skinViewer.camera.position.x = 15.78;
+            skinViewer.camera.position.y = 8.21;
+            skinViewer.camera.position.z = -32.6;
+            skinViewer.playerObject.position.x = 1;
+            skinViewer.playerObject.position.y = -3;
+            skinViewer.playerObject.position.z = -1;
+            skinViewer.playerObject.skin.head.rotation.x = -0.3;
+            skinViewer.playerObject.skin.head.rotation.y = 0;
+            skinViewer.playerObject.skin.head.rotation.z = -0.03;
+            
+            fakeAnimation(13);
         }
     </script>
 
