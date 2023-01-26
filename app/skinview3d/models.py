@@ -1,4 +1,4 @@
-from pydantic import BaseModel, root_validator
+from pydantic import BaseModel, root_validator, confloat
 import base64
 
 
@@ -8,8 +8,8 @@ class BackendInfo(BaseModel):
 
 
 class Both(BaseModel):
-    front: bytes
-    back: bytes
+    front: bytes | None
+    back: bytes | None
     both: bytes | None = None
     backendInfo: BackendInfo
 
@@ -31,3 +31,5 @@ class CommonQuery(BaseModel):
     skinUrl: str | None = None
     capeUrl: str | None = None
     nameTag: str | None = None
+    definition: confloat(ge=0.8, le=3.5) = 1.5
+    transparent: bool = False

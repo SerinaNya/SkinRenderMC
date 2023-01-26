@@ -17,5 +17,7 @@ router = APIRouter()
     },
 )
 async def get_back(q: CommonQuery = Depends(CommonQuery)):
-    resp = await getViewRaw(q.skinUrl, q.capeUrl, q.nameTag)
+    resp = await getViewRaw(
+        False, True, q.skinUrl, q.capeUrl, q.nameTag, q.definition, q.transparent
+    )
     return Response(resp.back, media_type="image/png")

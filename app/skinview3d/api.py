@@ -1,19 +1,20 @@
 from urllib.parse import urlencode
 
-from pyppeteer.launcher import connect
+from playwright.async_api import async_playwright
 
-from ..settings import (backendSkinView3D, browserWSEndpoint,
-                        elementScreenshotOptions)
+from ..settings import backendSkinView3D, browserWSEndpoint
 from .models import BackendInfo, Both
 
 
-async def getViewRaw(skinUrl: str | None, capeUrl: str | None, nameTag: str | None):
-    browser = await connect(browserWSEndpoint=browserWSEndpoint)
-    page = await browser.newPage()
-    await page.setViewport(
-        {"width": 1080, "height": 1920, "isMobile": True, "deviceScaleFactor": 3.0}
-    )
-
+async def getViewRaw(
+    shot_front: bool,
+    shot_back: bool,
+    skinUrl: str | None,
+    capeUrl: str | None,
+    nameTag: str | None,
+    device_scale: float,
+    omit_background: bool,
+):
     params = urlencode(
         {
             "skinUrl": skinUrl,
@@ -22,30 +23,43 @@ async def getViewRaw(skinUrl: str | None, capeUrl: str | None, nameTag: str | No
         }
     )
     url = f"{backendSkinView3D}?{params}"
-    await page.goto(url)
 
-    skin_container = await page.querySelector("#skin_container")
+    async with async_playwright() as p:
+        browser = await p.chromium.connect_over_cdp(browserWSEndpoint)
+        context = await browser.new_context(
+            viewport={"width": 1080, "height": 1920},
+            device_scale_factor=device_scale,
+        )
+        page = await context.new_page()
+        await page.goto(url)
 
-    view_front = await skin_container.screenshot(elementScreenshotOptions)
+        skin_container = page.locator("#skin_container")
 
-    await page.evaluate("showBack()")
+        if shot_front:
+            view_front = await skin_container.screenshot(
+            type="png", omit_background=omit_background
+        )
 
-    view_back = await skin_container.screenshot(elementScreenshotOptions)
+        await page.evaluate("showBack()")
 
-    backend_info = await page.evaluate(
-        """() => {
-        return {
-            slim: skinViewer.playerObject.skin.slim,
-            serverTimeJs: Date(),
-        }
-    }"""
-    )
+        if shot_back:
+            view_back = await skin_container.screenshot(
+            type="png", omit_background=omit_background
+        )
 
-    await page.close()
-    await browser.disconnect()
+        backend_info = await page.evaluate(
+            """() => {
+            return {
+                slim: skinViewer.playerObject.skin.slim,
+                serverTimeJs: Date(),
+            }
+        }"""
+        )
+
+        await context.close()
 
     return Both(
-        front=view_front,
-        back=view_back,
+        front=view_front if shot_front else None,
+        back=view_back if shot_back else None,
         backendInfo=BackendInfo.parse_obj(backend_info),
     )

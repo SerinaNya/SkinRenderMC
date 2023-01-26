@@ -18,6 +18,8 @@ router = APIRouter()
     },
 )
 async def get_all(q: CommonQuery = Depends(CommonQuery)):
-    resp = await getViewRaw(q.skinUrl, q.capeUrl, q.nameTag)
-    resp.both = spliceSameSizeImages_right(deque([resp.front, resp.back]))
+    resp = await getViewRaw(
+        True, True, q.skinUrl, q.capeUrl, q.nameTag, q.definition, q.transparent
+    )
+    resp.both = spliceSameSizeImages_right(deque((resp.front, resp.back)))
     return All_Response_Json.parse_obj(resp)

@@ -19,8 +19,10 @@ router = APIRouter()
     },
 )
 async def get_both(q: CommonQuery = Depends(CommonQuery)):
-    resp = await getViewRaw(q.skinUrl, q.capeUrl, q.nameTag)
+    resp = await getViewRaw(
+        True, True, q.skinUrl, q.capeUrl, q.nameTag, q.definition, q.transparent
+    )
     return Response(
-        spliceSameSizeImages_right(deque([resp.front, resp.back])),
+        spliceSameSizeImages_right(deque((resp.front, resp.back))),
         media_type="image/png",
     )

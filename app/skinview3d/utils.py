@@ -9,7 +9,7 @@ format = "png"
 
 
 def spliceSameSizeImages_right(ss_images: deque[bytes]):
-    generated_image = Image(width=1, height=1, background=background)
+    generated_image = Image(width=1, height=1, background=background)  # init
     if not ss_images:
         raise Exception("Are you kidding me? Why your ss_images has no element???")
     while ss_images:

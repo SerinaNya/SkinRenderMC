@@ -17,5 +17,7 @@ router = APIRouter()
     },
 )
 async def get_front(q: CommonQuery = Depends(CommonQuery)):
-    resp = await getViewRaw(q.skinUrl, q.capeUrl, q.nameTag)
+    resp = await getViewRaw(
+        True, False, q.skinUrl, q.capeUrl, q.nameTag, q.definition, q.transparent
+    )
     return Response(resp.front, media_type="image/png")

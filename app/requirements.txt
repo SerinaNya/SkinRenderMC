@@ -1,5 +1,5 @@
 fastapi
-pyppeteer
+playwright
 pydantic
 uvicorn[standard]
 Wand
