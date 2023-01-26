@@ -1,11 +1,11 @@
-FROM python:3.10-slim
+FROM python:3.10-alpine
 
 WORKDIR /app
 COPY . /app/server
 
-RUN sed -i "s@http://deb.debian.org@http://repo.huaweicloud.com@g" /etc/apt/sources.list && \
+RUN sed -i "s@https://dl-cdn.alpinelinux.org/@https://repo.huaweicloud.com/@g" /etc/apk/repositories && \
     apt update && \
-    apt install -y libmagickwand-dev
+    apk add install -y imagemagick-dev
 
 RUN pip3 config set global.index-url https://repo.huaweicloud.com/repository/pypi/simple && \
     pip3 install -r /app/server/requirements.txt
