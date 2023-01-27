@@ -4,7 +4,7 @@ WORKDIR /app
 COPY . /app/server
 
 RUN sed -i "s@https://dl-cdn.alpinelinux.org/@https://repo.huaweicloud.com/@g" /etc/apk/repositories && \
-    apt update && \
+    apk update && \
     apk add install -y imagemagick-dev
 
 RUN pip3 config set global.index-url https://repo.huaweicloud.com/repository/pypi/simple && \
