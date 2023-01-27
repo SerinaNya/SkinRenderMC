@@ -1,0 +1,32 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "master" ]
+
+
+jobs:
+  build-api:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build skinrendermc-api
+      working-directory: ./app
+      run: docker build -t jinzhijie/skinrendermc-api:$(date +%Y%m%d%H%M%S) -t jinzhijie/skinrendermc-api:latest .
+    - name: Push to Docker Hub
+      run: |
+        docker login --username=${{ secrets.DOCKERHUB_USERNAME }} --password ${{ secrets.DOCKERHUB_PASSWORD }}
+        docker push jinzhijie/skinrendermc-api:latest
+        
+
+  build-skinview3d:
+      runs-on: ubuntu-latest
+      steps:
+      - uses: actions/checkout@v3
+      - name: Build skinrendermc-skinview3d
+        working-directory: ./skinview3d
+        run: docker build -t jinzhijie/skinrendermc-skinview3d:$(date +%Y%m%d%H%M%S) -t jinzhijie/skinrendermc-skinview3d:latest .
+      - name: Push to Docker Hub
+        run: |
+          docker login --username=${{ secrets.DOCKERHUB_USERNAME }} --password ${{ secrets.DOCKERHUB_PASSWORD }}
+          docker push jinzhijie/skinrendermc-skinview3d:latest
