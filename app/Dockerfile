@@ -3,12 +3,10 @@ FROM python:3.10-alpine
 WORKDIR /app
 COPY . /app/server
 
-RUN sed -i "s@https://dl-cdn.alpinelinux.org/@https://repo.huaweicloud.com/@g" /etc/apk/repositories && \
-    apk update && \
-    apk add install imagemagick-dev
+RUN apk update && \
+    apk add imagemagick-dev
 
-RUN pip3 config set global.index-url https://repo.huaweicloud.com/repository/pypi/simple && \
-    pip3 install -r /app/server/requirements.txt
+RUN pip3 install -r /app/server/requirements.txt
 
 ENV browserWSEndpoint ws://chrome:3000
 ENV backendSkinView3D http://skinview3d/
