@@ -1,4 +1,5 @@
 # SkinRenderMC
+[![Docker Image CI](https://github.com/jinzhijie/SkinRenderMC/actions/workflows/docker-images.yml/badge.svg?branch=master)](https://github.com/jinzhijie/SkinRenderMC/actions/workflows/docker-images.yml)
 
 Render your Minecraft Skins and Capes in 3D view.
 
