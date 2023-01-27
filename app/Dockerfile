@@ -6,7 +6,8 @@ COPY . /app/server
 RUN apk update && \
     apk add imagemagick-dev
 
-RUN pip3 install -r /app/server/requirements.txt
+RUN pip3 install --upgrade pip && \
+    pip3 install -r /app/server/requirements.txt
 
 ENV browserWSEndpoint ws://chrome:3000
 ENV backendSkinView3D http://skinview3d/
