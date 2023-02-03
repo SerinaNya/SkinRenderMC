@@ -1,6 +1,6 @@
 from fastapi import FastAPI, status
 from fastapi.middleware.cors import CORSMiddleware
-from . import skinview3d
+from .skinview3d import url, littleskin, mojang
 
 app = FastAPI()
 
@@ -11,7 +11,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-for m in (skinview3d, ):
+for m in (url, littleskin, mojang):
     app.include_router(m.router)
 
 

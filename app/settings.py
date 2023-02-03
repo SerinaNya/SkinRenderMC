@@ -1,4 +1,8 @@
-from os import getenv
+from pydantic import BaseSettings
 
-browserWSEndpoint = getenv('browserWSEndpoint')
-backendSkinView3D = getenv('backendSkinView3D')
+
+class Settings(BaseSettings):
+    browserWSEndpoint: str
+    backendSkinView3D: str
+
+settings = Settings()

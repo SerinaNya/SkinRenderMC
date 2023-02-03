@@ -1,16 +1,13 @@
-from collections import deque
-
 from fastapi import APIRouter, Depends
 
-from ..api import getViewRaw
+from ..core import get_common_response
 from ..models import All_Response_Json, CommonQuery
-from ..utils import spliceSameSizeImages_right
 
 router = APIRouter()
 
 
 @router.get(
-    "/all",
+    "/json/all",
     responses={
         200: {
             "description": "The front & back & both view of the player with extra backend info. Images are base64ed.",
@@ -18,8 +15,5 @@ router = APIRouter()
     },
 )
 async def get_all(q: CommonQuery = Depends(CommonQuery)):
-    resp = await getViewRaw(
-        True, True, q.skinUrl, q.capeUrl, q.nameTag, q.definition, q.transparent
-    )
-    resp.both = spliceSameSizeImages_right(deque((resp.front, resp.back)))
+    resp = await get_common_response.get_both(q)
     return All_Response_Json.parse_obj(resp)

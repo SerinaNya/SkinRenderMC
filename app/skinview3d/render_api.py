@@ -2,8 +2,8 @@ from urllib.parse import urlencode
 
 from playwright.async_api import async_playwright
 
-from ..settings import backendSkinView3D, browserWSEndpoint
-from .models import BackendInfo, Both
+from ..settings import settings
+from .models import BackendInfo, CommonResponse
 
 
 async def getViewRaw(
@@ -22,10 +22,10 @@ async def getViewRaw(
             "nameTag": nameTag,
         }
     )
-    url = f"{backendSkinView3D}?{params}"
+    url = f"{settings.backendSkinView3D}?{params}"
 
     async with async_playwright() as p:
-        browser = await p.chromium.connect_over_cdp(browserWSEndpoint)
+        browser = await p.chromium.connect_over_cdp(settings.browserWSEndpoint)
         context = await browser.new_context(
             viewport={"width": 1080, "height": 1920},
             device_scale_factor=device_scale,
@@ -58,7 +58,7 @@ async def getViewRaw(
 
         await context.close()
 
-    return Both(
+    return CommonResponse(
         front=view_front if shot_front else None,
         back=view_back if shot_back else None,
         backendInfo=BackendInfo.parse_obj(backend_info),

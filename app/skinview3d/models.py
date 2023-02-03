@@ -7,11 +7,20 @@ class BackendInfo(BaseModel):
     serverTimeJs: str
 
 
-class Both(BaseModel):
+class CommonResponse(BaseModel):
     front: bytes | None
     back: bytes | None
     both: bytes | None = None
     backendInfo: BackendInfo
+
+    @property
+    def auto_image(self):
+        if self.both:
+            return self.both
+        elif self.front:
+            return self.front
+        elif self.back:
+            return self.back
 
 
 class All_Response_Json(BaseModel):
@@ -26,10 +35,11 @@ class All_Response_Json(BaseModel):
             values[f"{i}_b64"] = base64.b64encode(values[i]) if values[i] else ''
         return values
 
+class CommonOptions(BaseModel):
+    definition: confloat(ge=0.8, le=3.5) = 1.5
+    transparent: bool = False    
 
-class CommonQuery(BaseModel):
+class CommonQuery(CommonOptions):
     skinUrl: str | None = None
     capeUrl: str | None = None
     nameTag: str | None = None
-    definition: confloat(ge=0.8, le=3.5) = 1.5
-    transparent: bool = False
