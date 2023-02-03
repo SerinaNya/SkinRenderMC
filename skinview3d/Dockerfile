@@ -7,5 +7,6 @@ RUN pnpm i
 FROM caddy:2-alpine
 COPY --from=node /app /app
 
+WORKDIR /app
 ENTRYPOINT [ "/bin/sh", "-c" ]
 CMD [ "caddy file-server --browse --root /app" ]
