@@ -1,6 +1,7 @@
 fastapi
 playwright
 pydantic
+pydantic-settings
 uvicorn[standard]
 Wand
 yggdrasil-mc==0.1b6

@@ -1,5 +1,6 @@
-from pydantic import BaseModel, root_validator, confloat
+from pydantic import model_validator, Field, BaseModel
 import base64
+from typing_extensions import Annotated
 
 
 class BackendInfo(BaseModel):
@@ -8,8 +9,8 @@ class BackendInfo(BaseModel):
 
 
 class CommonResponse(BaseModel):
-    front: bytes | None
-    back: bytes | None
+    front: bytes | None = None
+    back: bytes | None = None
     both: bytes | None = None
     backendInfo: BackendInfo
 
@@ -29,14 +30,15 @@ class All_Response_Json(BaseModel):
     both_b64: str
     backendInfo: BackendInfo
     
-    @root_validator(pre=True)
+    @model_validator(mode="before")
+    @classmethod
     def convertToBase64(cls, values):
         for i in ("front", "back", "both"):
             values[f"{i}_b64"] = base64.b64encode(values[i]) if values[i] else ''
         return values
 
 class CommonOptions(BaseModel):
-    definition: confloat(ge=0.8, le=3.5) = 1.5
+    definition: Annotated[float, Field(ge=0.8, le=3.5)] = 1.5
     transparent: bool = False    
 
 class CommonQuery(CommonOptions):
