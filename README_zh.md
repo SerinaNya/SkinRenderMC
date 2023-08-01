@@ -12,7 +12,7 @@
 
 
 ```plain
-GET http://<your_server>:57680/skinview3d/image/both
+GET http://<your_server>:57680/url/image/both
     ?skinUrl=<your_skin_url>
     &capeUrl=<your_cape_url>
     &nameTag=<your_player_name>
@@ -24,7 +24,7 @@ GET http://<your_server>:57680/skinview3d/image/both
 它会吐出来：
 
 
-![前视角和后视角下的一个名叫 yushijinhun 的 Minecraft 玩家模型](https://pic.imgdb.cn/item/63d361afface21e9ef83c83c.png)
+![前视角和后视角下的一个名叫 yushijinhun 的 Minecraft 玩家模型](./assets/yushijinhun_both.png)
 
 
 没错，此灵车基于 [`bs-community/skinview3d`](https://github.com/bs-community/skinview3d)，开发者 [`yushijinhun`](https://github.com/yushijinhun) 是 `skinview3d` 的现任主要维护者。
@@ -90,6 +90,6 @@ sudo docker-compose up -d
 
 ## 为什么叫灵车？
 
-因为没有 Star。你知道我要说什么的 → <https://github.com/jinzhijie/SkinRenderMC>
+因为没有 Star。你知道我要说什么的 →  <https://github.com/jinzhijie/SkinRenderMC>
 
 你的 Star 就是我的动力！
