@@ -1,16 +1,16 @@
-from yggdrasil_mc.ygg_async import YggdrasilGameProfileApi, YggdrasilPlayerUuidApi
+from yggdrasil_mc import YggdrasilPlayer
 
 from ..models import CommonQuery, CommonOptions
 
-LITTLESKIN = "https://littleskin.cn/api/yggdrasil"
+LITTLESKIN = YggdrasilPlayer("https://littleskin.cn/api/yggdrasil")
 
 
 async def get_uuid(player_name: str):
-    return await YggdrasilPlayerUuidApi.getBlessingSkinServer(LITTLESKIN, player_name)
+    return await LITTLESKIN.Uuid.get3rdAsync(player_name)
 
 
 async def get_query(player_uuid: str, options: CommonOptions = CommonOptions()):
-    resp = await YggdrasilGameProfileApi.getBlessingSkinServer(LITTLESKIN, player_uuid)
+    resp = await LITTLESKIN.Profile.get3rdAsync(player_uuid)
     name_tag = resp.name
     skin_url = resp.properties.textures.textures.skin.url
     cape_url = resp.properties.textures.textures.cape.url

@@ -3,4 +3,4 @@ playwright
 pydantic
 uvicorn[standard]
 Wand
-yggdrasil-mc==0.1b3
+yggdrasil-mc==0.1b6
