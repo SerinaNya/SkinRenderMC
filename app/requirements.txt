@@ -4,4 +4,4 @@ pydantic
 pydantic-settings
 uvicorn[standard]
 Wand
-yggdrasil-mc==0.1b6
+yggdrasil-mc==0.1b8
