@@ -10,23 +10,27 @@
         <title>skinview3d render - SkinRenderMC</title>
         <style>
             @font-face {
-            font-family: "Minecraft";
-            src: url("./node_modules/skinview3d/assets/minecraft.woff2") format("woff2");
+                font-family: 'Minecraft';
+                /* src: url('https://cdn.jsdelivr.net/npm/skinview3d@3.0.0-alpha.1/assets/minecraft.woff2')
+                    format('woff2'); */
+                src: url("./node_modules/skinview3d/assets/minecraft.woff2") format("woff2");
             }
 
             body {
-            font-family: "Helvetica", "Arial", "sans-serif";
+                font-family: 'Helvetica', 'Arial', 'sans-serif';
                 margin: 5px;
             }
 
             .front {
                 filter: drop-shadow(0px 7px 10px rgba(0, 0, 0, 0.3));
             }
+
             .back {
                 filter: drop-shadow(0px 7px 10px rgba(0, 0, 0, 0.3));
             }
         </style>
-    <script src="./node_modules/skinview3d/bundles/skinview3d.bundle.js"></script>
+        <script src="./node_modules/skinview3d/bundles/skinview3d.bundle.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/skinview3d@3.0.0-alpha.1/bundles/skinview3d.bundle.min.js"></script> -->
     </head>
 
     <body>
@@ -82,9 +86,9 @@
             skinViewer.fov = 70;
             skinViewer.zoom = 1.0;
             function showFront() {
-                skinViewer.camera.position.x = 9.6;
-                skinViewer.camera.position.y = 14.7;
-                skinViewer.camera.position.z = 30.7;
+                skinViewer.camera.position.x = 13.8;
+                skinViewer.camera.position.y = 14.9;
+                skinViewer.camera.position.z = 28.9;
 
                 // Head
                 skinViewer.playerObject.skin.head.rotation.x = -0.2;
@@ -97,14 +101,13 @@
                 if (nameTag != null) {
                     skinViewer.nameTag.visible = !hideNameTag;
                 }
-                skinViewer.camera.position.x = -5.8;
-                skinViewer.camera.position.y = 13.7;
-                skinViewer.camera.position.z = -32.1;
+                skinViewer.camera.position.x = -14.6;
+                skinViewer.camera.position.y = 13.9;
+                skinViewer.camera.position.z = -29.1;
 
-                skinViewer.playerObject.skin.head.rotation.x = 0.3;
+                skinViewer.playerObject.skin.head.rotation.x = 0;
 
-
-                fakeAnimation(10);
+                fakeAnimation(12);
             }
 
             showFront();
