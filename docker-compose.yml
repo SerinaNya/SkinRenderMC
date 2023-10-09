@@ -24,6 +24,7 @@ services:
     environment:
       - PREBOOT_CHROME="true"
       - KEEP_ALIVE="true"
+      - ENABLE_CORS="true"
     restart: always
     networks:
       - default
