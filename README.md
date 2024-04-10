@@ -1,7 +1,10 @@
 # SkinRenderMC
-[![Docker Image CI](https://github.com/jinzhijie/SkinRenderMC/actions/workflows/docker-images.yml/badge.svg?branch=master)](https://github.com/jinzhijie/SkinRenderMC/actions/workflows/docker-images.yml)
+[![Docker Image CI](https://github.com/SerinaNya/SkinRenderMC/actions/workflows/docker-images.yml/badge.svg?branch=master)](https://github.com/SerinaNya/SkinRenderMC/actions/workflows/docker-images.yml)
 
 Render your Minecraft Skins and Capes in 3D view.
+
+> [!TIP]
+> This project is under development. I will update it soon.
 
 [简体中文版本](./README_zh.md)
 
@@ -38,6 +41,12 @@ Thanks to `yushijinhun` for guiding me during the development of this app.
     When the value is `true`, the background of the generated image will be transparent.
 
 # Deploy
+
+> [!IMPORTANT]  
+> Require **more than** _2 CPU Core & 2GB RAM_ to run this application.  
+> 
+> Recommended 4 CPU Core & 4GB RAM.
+
 Check out the **PRETTY** & **HARMLESS** `docker-compose.yml`!  
 
 You know what you are supposed to do now!
@@ -46,11 +55,11 @@ If you don't know what to do, follow the instructions below:
 
 ```sh
 mkdir skinrendermc && cd skinrendermc
-curl -O docker-compose.yml https://github.com/jinzhijie/SkinRenderMC/raw/master/docker-compose.yml
-sudo docker-compose up -d
+curl -O docker-compose.yml https://github.com/SerinaNya/SkinRenderMC/raw/master/docker-compose.yml
+sudo docker compose up -d
 ```
 
-The server will start on port `57680`. Access `http://<ip>:56780/docs` to see API documentation.
+The server will start on port `57680`. Access `http://<ip>:56780/docs` to see OpenAPI documentation.
 
 # Support this Project
 I know you are busy, but I really need your support! Could you offer me a star? 😭😭😭

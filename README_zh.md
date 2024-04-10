@@ -1,9 +1,7 @@
 # SkinRenderMC  你先别急皮肤渲染器
 
-
-你说的对，但是《SkinRenderMC》是由 Xiao_Jin 开发的一款 Minecraft 皮肤渲染器。软件诞生在一个叫「FastAPI」的美好世界，在这里，被神选中的人将被授予「键盘」，导引「VSCode」​​​‌‌‌‌‌‌‌‌​​‌‌​‌‌‌​‌​。你将扮演一位名为「个人开发者」的神秘角色，在代码的编写中邂逅不同语言、不同框架的同伴们，和他们一起击败「three.js」，找回失散的「WebGL2 Canvas」—— 同时，逐步发掘「Chromium」的真相。
-
-
+> [!TIP]  
+> 此项目尚处于开发阶段，我很快就会更新这个项目。
 
 # 此灵车能做什么？
 
@@ -21,7 +19,7 @@ GET http://<your_server>:57680/url/image/both
 ```
 
 
-它会吐出来：
+它会输出：
 
 
 ![前视角和后视角下的一个名叫 yushijinhun 的 Minecraft 玩家模型](./assets/yushijinhun_both.png)
@@ -52,35 +50,36 @@ GET http://<your_server>:57680/url/image/both
 
 # 部署此灵车
 
+> [!IMPORTANT]  
+> 需要**至少**_2 CPU 核心 & 2GB 运行内存_ 来运行这个程序！  
+> 
+> 推荐配置为 **4 CPU 核心 & 4GB 运行内存**
+
+看看那个人畜无害的 `docker-compose.yml` 你就知道了！
+
 ```sh
 mkdir skinrendermc && cd skinrendermc
-curl -O docker-compose.yml https://github.com/jinzhijie/SkinRenderMC/raw/master/docker-compose.yml
-sudo docker-compose up -d
+curl -O docker-compose.yml https://github.com/SerinaNya/SkinRenderMC/raw/master/docker-compose.yml
+sudo docker compose up -d
 ```
 
-服务器将在 `57680` 端口上启动，访问 `http://<ip>:56780/docs` 查看 API 文档。
+服务器将在 `57680` 端口上启动，访问 `http://<ip>:56780/docs` 查看 OpenAPI 文档。
 
 ---
 
 # 中文特供部分
 
-## 为什么叫这个中文名？
-
-> 值越大，越清晰，分辨率越大，数据大小越大。
-
-他们无头浏览器是这样的。
-
 ## 真的很急咋办？
 
-> 值越大，越清晰，分辨率越大，数据大小越大。
+速度确实有些慢，这主要是 Headless Chrome 使用 WebGL 渲染导致的，他们无头浏览器是这样的。
 
-
-经过测试，`definition=1.5` 能满足大部分场景下的需求。`1.25` 也能将就着用用。
+可以尝试提高运行设备的配置，或参考下述方案调整输出。
 
 ## 糊！
 
 > 值越大，越清晰，分辨率越大，数据大小越大。
 
+经过测试，`definition=1.5` 能满足大部分场景下的需求。`1.25` 也能将就着用用。
 
 ## 就这么一个功能？
 
@@ -90,6 +89,6 @@ sudo docker-compose up -d
 
 ## 为什么叫灵车？
 
-因为没有 Star。你知道我要说什么的 →  <https://github.com/jinzhijie/SkinRenderMC>
+因为没有 Star。你知道我要说什么的 →  <https://github.com/SerinaNya/SkinRenderMC>
 
 你的 Star 就是我的动力！
