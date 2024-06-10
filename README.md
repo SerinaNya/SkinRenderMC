@@ -8,6 +8,22 @@ Render your Minecraft Skins and Capes in 3D view.
 
 [简体中文版本](./README_zh.md)
 
+> [!TIP]
+>
+> SkinRenderMC 所使用的 Docker Image 也被上传至 **腾讯云** 和 **阿里云** 容器镜像仓库中。
+>
+> `jinzhijie/skinrendermc-api:latest`  
+> - `registry.cn-shanghai.aliyuncs.com/serinanya/skinrendermc-api:latest`  
+> - `ccr.ccs.tencentyun.com/serinanya/skinrendermc-api:latest`
+> 
+> `browserless/chrome:latest`  
+> - `registry.cn-shanghai.aliyuncs.com/serinanya/browserless/chrome:latest`  
+> - `ccr.ccs.tencentyun.com/serinanya/browserless/chrome:latest`
+>
+> `jinzhijie/skinrendermc-skinview3d:latest`  
+> - `registry.cn-shanghai.aliyuncs.com/serinanya/skinrendermc-skinview3d:latest`  
+> - `ccr.ccs.tencentyun.com/serinanya/skinrendermc-skinview3d:latest`
+
 # What can this app do?
 
 Send a HTTP request:

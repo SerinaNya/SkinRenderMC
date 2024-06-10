@@ -4,7 +4,9 @@ networks:
     driver: bridge
 services:
   api:
-    image: jinzhijie/skinrendermc-api:latest
+    # image: jinzhijie/skinrendermc-api:latest
+    # image: registry.cn-shanghai.aliyuncs.com/serinanya/skinrendermc-api:latest
+    image: ccr.ccs.tencentyun.com/serinanya/skinrendermc-api:latest
     ports:
       - 57680:57680
     environment:
@@ -20,7 +22,9 @@ services:
     networks:
       - default
   chrome:
-    image: browserless/chrome:latest
+    # image: browserless/chrome:latest
+    # image: registry.cn-shanghai.aliyuncs.com/serinanya/browserless/chrome:latest
+    image: ccr.ccs.tencentyun.com/serinanya/browserless/chrome:latest
     environment:
       - PREBOOT_CHROME="true"
       - KEEP_ALIVE="true"
@@ -29,7 +33,9 @@ services:
     networks:
       - default
   skinview3d:
-    image: jinzhijie/skinrendermc-skinview3d:latest
+    # image: jinzhijie/skinrendermc-skinview3d:latest
+    # image: registry.cn-shanghai.aliyuncs.com/serinanya/skinrendermc-skinview3d:latest
+    image: ccr.ccs.tencentyun.com/serinanya/skinrendermc-skinview3d:latest
     restart: always
     networks:
       - default
