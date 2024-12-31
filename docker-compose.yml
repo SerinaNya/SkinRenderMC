@@ -23,8 +23,8 @@ services:
       - default
   chrome:
     # image: browserless/chrome:latest
-    # image: registry.cn-shanghai.aliyuncs.com/serinanya/browserless/chrome:latest
-    image: ccr.ccs.tencentyun.com/serinanya/browserless/chrome:latest
+    # image: registry.cn-shanghai.aliyuncs.com/serinanya/browserless:latest
+    image: ccr.ccs.tencentyun.com/serinanya/browserless:latest
     environment:
       - PREBOOT_CHROME="true"
       - KEEP_ALIVE="true"
