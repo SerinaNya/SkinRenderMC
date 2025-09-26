@@ -3,6 +3,18 @@
 
 Render your Minecraft Skins and Capes in 3D view.
 
+---
+
+<div align="center">
+
+_Eidolon_, made by my friend, is **better** than this ~bullshit~ project.
+
+**👉 Try it: https://github.com/bingling-sama/Eidolon** 👈
+
+</div>
+
+---
+
 > [!TIP]
 > This project is under development. I will update it soon.
 
